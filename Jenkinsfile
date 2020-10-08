@@ -1,16 +1,18 @@
-Pipeline {
+pipeline {
     agent any
-    stage {
-        stage ('Build Aplication')
-          steps {
-              sh 'mvn clean package'
-          }
-          post {
-              success {
-                archiveArtifacts artifacts: '**/*.war'
-              }
-              
-          }
+    environment {
+        PATH= "/opt/maven/bin/:$PATH"
     }
+    stages {
+        stage ("clone code"){
 
+            steps{
+                git credentialsId: 'PussInBoots91', url: 'https://github.com/PussInBoots91/metrials.git'
+            }
+        }
+        stage("Build Code")
+         steps{
+             sh "mvn clean install"
+         }
+    }
 }
