@@ -3,7 +3,7 @@ Pipeline {
     stage {
         stage ('Build Aplication')
           steps {
-              sh 'mvn -f metrials/pom.xml clean package'
+              sh 'mvn clean package'
           }
           post {
               success {
